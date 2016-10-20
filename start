@@ -1,0 +1,4 @@
+sudo killall nodejs
+sudo killall node
+sudo killall forever
+
