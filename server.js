@@ -13,7 +13,7 @@ var Strategy = require('passport-twitter').Strategy;
 passport.use(new Strategy({
     consumerKey: 'q2JfZwE8BTIHHNruzRqaWubEI',
     consumerSecret: 'FI4nM1BuayKsMBLZ2fA4zicaOkNUvjrhfRgiDYngVQVBtkXRyT',
-    callbackURL: 'http://127.0.0.1:3000/login/twitter/return'
+    callbackURL: 'http://twitterauthb.azurewebsites.net/login/twitter/return'
   },
   function(token, tokenSecret, profile, cb) {
     // In this example, the user's Twitter profile is supplied as the user
@@ -87,4 +87,4 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 
-app.listen(3000);
+app.listen(80);
