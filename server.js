@@ -1,111 +1,90 @@
-﻿var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var OAuth = require('oauth').OAuth;
+var express = require('express');
+var passport = require('passport');
+var Strategy = require('passport-twitter').Strategy;
 
-var oa = new OAuth(
-    "https://api.twitter.com/oauth/request_token",
-	"https://api.twitter.com/oauth/access_token",
-	"q2JfZwE8BTIHHNruzRqaWubEI",
-	"FI4nM1BuayKsMBLZ2fA4zicaOkNUvjrhfRgiDYngVQVBtkXRyT",
-	"1.0",
-	"http://twitterauthb.azurewebsites.net/auth/twitter/callback",
-	"HMAC-SHA1"
-);
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// Configure the Twitter strategy for use by Passport.
+//
+// OAuth 1.0-based strategies require a `verify` function which receives the
+// credentials (`token` and `tokenSecret`) for accessing the Twitter API on the
+// user's behalf, along with the user's profile.  The function must invoke `cb`
+// with a user object, which will be set at `req.user` in route handlers after
+// authentication.
+passport.use(new Strategy({
+    consumerKey: 'q2JfZwE8BTIHHNruzRqaWubEI',
+    consumerSecret: 'FI4nM1BuayKsMBLZ2fA4zicaOkNUvjrhfRgiDYngVQVBtkXRyT',
+    callbackURL: 'http://127.0.0.1:3000/login/twitter/return'
+  },
+  function(token, tokenSecret, profile, cb) {
+    // In this example, the user's Twitter profile is supplied as the user
+    // record.  In a production-quality application, the Twitter profile should
+    // be associated with a user record in the application's database, which
+    // allows for account linking and authentication with other identity
+    // providers.
+    return cb(null, profile);
+  }));
 
+
+// Configure Passport authenticated session persistence.
+//
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  In a
+// production-quality application, this would typically be as simple as
+// supplying the user ID when serializing, and querying the user record by ID
+// from the database when deserializing.  However, due to the fact that this
+// example does not have a database, the complete Twitter profile is serialized
+// and deserialized.
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+// Create a new Express application.
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// Configure view engine to render EJS templates.
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
+// Use application-level middleware for common functionality, including
+// logging, parsing, and session handling.
+app.use(require('morgan')('combined'));
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
 
+// Define routes.
+app.get('/',
+  function(req, res) {
+    res.render('home', { user: req.user });
+  });
 
-app.get('/auth/twitter', function (req, res) {
-    oa.getOAuthRequestToken(function (error, oauth_token, oauth_token_secret, results) {
-        if (error) {
-            console.log(error);
-            res.send("yeah no. didn't work.")
-        }
-        else {
-            req.session.oauth = {};
-            req.session.oauth.token = oauth_token;
-            console.log('oauth.token: ' + req.session.oauth.token);
-            req.session.oauth.token_secret = oauth_token_secret;
-            console.log('oauth.token_secret: ' + req.session.oauth.token_secret);
-            res.redirect('https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token)
-        }
-    });
-});
-app.get('/auth/twitter/callback', function (req, res, next) {
-    if (req.session.oauth) {
-        req.session.oauth.verifier = req.query.oauth_verifier;
-        var oauth = req.session.oauth;
-        
-        oa.getOAuthAccessToken(oauth.token, oauth.token_secret, oauth.verifier, 
-		function (error, oauth_access_token, oauth_access_token_secret, results) {
-            if (error) {
-                console.log(error);
-                res.send("yeah something broke.");
-            } else {
-                req.session.oauth.access_token = oauth_access_token;
-                req.session.oauth, access_token_secret = oauth_access_token_secret;
-                console.log(results);
-                res.send("worked. nice one.");
-            }
-        }
-        );
-    } else
-        next(new Error("you're not supposed to be here."))
-});
+app.get('/login',
+  function(req, res){
+    res.render('login');
+  });
 
-app.use('/', routes);
-app.use('/users', users);
+app.get('/login/twitter',
+  passport.authenticate('twitter'));
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+app.get('/login/twitter/return', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
-// error handlers
+app.get('/profile',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.render('profile', { user: req.user });
+  });
 
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
-
-module.exports = app;
+app.listen(3000);
