@@ -12,7 +12,7 @@ var oa = new OAuth(
 	"q2JfZwE8BTIHHNruzRqaWubEI",
 	"FI4nM1BuayKsMBLZ2fA4zicaOkNUvjrhfRgiDYngVQVBtkXRyT",
 	"1.0",
-	"http://localhost:1337/auth/twitter/callback",
+	"http://twitterauthb.azurewebsites.net/auth/twitter/callback",
 	"HMAC-SHA1"
 );
 
