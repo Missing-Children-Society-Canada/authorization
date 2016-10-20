@@ -72,8 +72,7 @@ app.get('/login',
     res.render('login');
   });
 
-app.get('/login/twitter',
-  passport.authenticate('twitter'));
+app.get('/login/twitter', passport.authenticate('twitter'));
 
 app.get('/login/twitter/return',
   passport.authenticate('twitter', { failureRedirect: '/login' }),
