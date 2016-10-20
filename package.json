@@ -1,22 +1,11 @@
 {
-  "name": "express-4.x-twitter-example",
+  "name": "auth",
   "version": "0.0.0",
-  "description": "Express 4.x app using Passport for authentication with Twitter.",
   "keywords": [
     "example",
     "express",
     "passport"
   ],
-  "author": "Jared Hanson",
-  "license": "Unlicense",
-  "homepage": "https://github.com/passport/express-4.x-twitter-example",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/passport/express-4.x-twitter-example.git"
-  },
-  "bugs": {
-    "url": "https://github.com/passport/express-4.x-twitter-example/issues"
-  },
   "dependencies": {
     "body-parser": "^1.13.2",
     "connect-ensure-login": "^0.1.1",

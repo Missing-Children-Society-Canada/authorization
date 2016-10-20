@@ -25,7 +25,6 @@ passport.use(new Strategy({
     return cb(null, profile);
   }));
 
-
 // Configure Passport authenticated session persistence.
 //
 // In order to restore authentication state across HTTP requests, Passport needs
