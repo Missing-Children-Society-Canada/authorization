@@ -1,7 +1,7 @@
 var config = {}
 
 
-config.host =  "https://testingnodeprofile.documents.azure.com:443/";
+config.host = "https://testingnodeprofile.documents.azure.com:443/";
 config.authKey = process.env.AUTH_KEY || "5dX4ZXzSUPn1VuHP59K1IQGDEJbiUojGZuHc6HrivRSWIxs5lZrtAYnEidoZi4E7jlPTBP4kcFoiRzn4tLZAwQ====";
 config.databaseId = "missingdata";
 config.collectionId = "twitter-profile";
