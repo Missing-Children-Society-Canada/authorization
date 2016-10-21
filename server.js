@@ -17,27 +17,15 @@ passport.use(new Strategy({
   callbackURL: config.callbackURL
 },
   function (token, tokenSecret, profile, cb) {
+    var now = new Date();
 
-console.log('happy');
-console.log(config.collLink);
-console.log(config.host);
-console.log(config.authKey);
-
-
-var toStore = {
-  raw: profile,
-  id: parseInt(profile.id),
-}
-var documentDefinition = { id: "hello world doc 9", content: "Hello World!" };
-    docDbClient.createDocument(config.collLink, documentDefinition, function (err, document) {
+    docDbClient.createDocument(config.collLink, profile, function (err, document) {
       if (err) {
-        console.log(err);
         appInsights.client.trackException(err);
       }
-
     });
 
-
+    appInsights.client.trackDependency("documentdb", "twitter-save-profile", Date.now() - now, true);
     return cb(null, profile);
   }));
 
