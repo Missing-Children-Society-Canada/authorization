@@ -12,6 +12,7 @@
     "passport": "^0.2.2",
     "passport-twitter": "^1.0.3",
     "applicationinsights": "~0.15.19",
-    "documentdb":"^1.10.0"
+    "documentdb":"^1.10.0",
+    "async":"^2.1.2"
   }
 }

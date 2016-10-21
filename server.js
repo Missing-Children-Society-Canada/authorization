@@ -4,10 +4,17 @@ var Strategy = require('passport-twitter').Strategy;
 var DocumentDBClient = require('documentdb').DocumentClient;
 var appInsights = require("applicationinsights");
 var config = require('./config');
+var ProfileDao = require('./profileDao');
 
 appInsights.setup("c31db7e0-5df2-44ad-9e76-892af521eecf").start();
 
-var expressPort = process.env.PORT || 80;
+var docDbClient = new DocumentDBClient(config.host, {
+  masterKey: config.authKey
+});
+var profileDao = new ProfileDao(docDbClient, config.databaseId, config.collectionId);
+profileDao.init();
+
+var expressPort = process.env.PORT || 8080;
 
 // Configure the Twitter strategy for use by Passport.
 //
@@ -19,30 +26,9 @@ var expressPort = process.env.PORT || 80;
 passport.use(new Strategy({
   consumerKey: 'q2JfZwE8BTIHHNruzRqaWubEI',
   consumerSecret: 'FI4nM1BuayKsMBLZ2fA4zicaOkNUvjrhfRgiDYngVQVBtkXRyT',
-  callbackURL: 'http://twitterauthb.azurewebsites.net/login/twitter/return'
+  callbackURL: 'http://localhost:8080/login/twitter/return'
 },
   function (token, tokenSecret, profile, cb) {
-    var startTime = Date.now();
-    var success = true;
-
-    var self = this;
-
-    var item = {
-      data: Date.now(),
-      profile: profile,
-    };
-
-    self.client.createDocument(self.collection._self, item, function (err, doc) {
-      if (err) {
-        appInsights.client.trackException(err);
-      } else {
-        callback(null, doc);
-      }
-    });
-
-    var elapsedTime = Date.now() - startTime;
-    appInsights.client.trackDependency("documentdb", "save-profile", elapsedTime, success);
-
     return cb(null, profile);
   }));
 
@@ -97,7 +83,15 @@ app.get('/login/twitter/return',
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function (req, res) {
-    res.render('profile', { user: req.user });
+    var profile = req.user;
+
+    self.profileDao.addProfile(profile, function (err) {
+      if (err) {
+        throw (err);
+      }
+    });
+
+    res.render('profile', { user: profile });
   });
 
 app.listen(expressPort);
