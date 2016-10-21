@@ -3,6 +3,7 @@ var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
 var DocumentDBClient = require('documentdb').DocumentClient;
 var appInsights = require("applicationinsights");
+var config = require('./config');
 
 appInsights.setup("XXXXXXXXXXXXXXXXXXX").start();
 
