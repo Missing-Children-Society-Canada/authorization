@@ -33,20 +33,7 @@ ProfileDao.prototype = {
             }
         });
     },
-
-    find: function (querySpec, callback) {
-        var self = this;
-
-        self.client.queryDocuments(self.collection._self, querySpec).toArray(function (err, results) {
-            if (err) {
-              //  callback(err);
-
-            } else {
-                callback(null, results);
-            }
-        });
-    },
-
+    
     addProfile: function (profile, callback) {
         var self = this;
 
@@ -58,49 +45,6 @@ ProfileDao.prototype = {
 
             } else {
                 callback(null, doc);
-            }
-        });
-    },
-
-    updateItem: function (id, callback) {
-        var self = this;
-
-        self.getItem(id, function (err, doc) {
-            if (err) {
-            //    callback(err);
-
-            } else {
-                doc.completed = true;
-
-                self.client.replaceDocument(doc._self, doc, function (err, replaced) {
-                    if (err) {
-                        callback(err);
-
-                    } else {
-                        callback(null, replaced);
-                    }
-                });
-            }
-        });
-    },
-
-    getProfile: function (id, callback) {
-        var self = this;
-
-        var querySpec = {
-            query: 'SELECT * FROM root r WHERE r.id = @id',
-            parameters: [{
-                name: '@id',
-                value: id
-            }]
-        };
-
-        self.client.queryDocuments(self.collection._self, querySpec).toArray(function (err, results) {
-            if (err) {
-             //   callback(err);
-
-            } else {
-                callback(null, results[0]);
             }
         });
     }

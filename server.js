@@ -16,31 +16,23 @@ profileDao.init();
 
 var expressPort = process.env.PORT || 8080;
 
-// Configure the Twitter strategy for use by Passport.
-//
-// OAuth 1.0-based strategies require a `verify` function which receives the
-// credentials (`token` and `tokenSecret`) for accessing the Twitter API on the
-// user's behalf, along with the user's profile.  The function must invoke `cb`
-// with a user object, which will be set at `req.user` in route handlers after
-// authentication.
 passport.use(new Strategy({
-  consumerKey: 'q2JfZwE8BTIHHNruzRqaWubEI',
-  consumerSecret: 'FI4nM1BuayKsMBLZ2fA4zicaOkNUvjrhfRgiDYngVQVBtkXRyT',
-  callbackURL: 'http://localhost:8080/login/twitter/return'
+  consumerKey: config.consumerKey,
+  consumerSecret: config.consumerSecret,
+  callbackURL: config.callbackURL
 },
   function (token, tokenSecret, profile, cb) {
+    var self = this;
+
+    self.profileDao.addProfile(profile, function (err) {
+      if (err) {
+        throw (err);
+      }
+    });
+
     return cb(null, profile);
   }));
 
-// Configure Passport authenticated session persistence.
-//
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session.  In a
-// production-quality application, this would typically be as simple as
-// supplying the user ID when serializing, and querying the user record by ID
-// from the database when deserializing.  However, due to the fact that this
-// example does not have a database, the complete Twitter profile is serialized
-// and deserialized.
 passport.serializeUser(function (user, cb) {
   cb(null, user);
 });
@@ -83,15 +75,7 @@ app.get('/login/twitter/return',
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function (req, res) {
-    var profile = req.user;
-
-    self.profileDao.addProfile(profile, function (err) {
-      if (err) {
-        throw (err);
-      }
-    });
-
-    res.render('profile', { user: profile });
+    res.render('profile', { user: req.user });
   });
 
 app.listen(expressPort);
