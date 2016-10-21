@@ -9,6 +9,7 @@ appInsights.setup("c31db7e0-5df2-44ad-9e76-892af521eecf").start();
 
 var docDbClient = new DocumentDBClient(config.host, { masterKey: config.authKey });
 
+console.log(docDbClient);
 var expressPort = process.env.PORT || 8080;
 
 passport.use(new Strategy({
@@ -16,9 +17,11 @@ passport.use(new Strategy({
   consumerSecret: config.consumerSecret,
   callbackURL: config.callbackURL
 },
-  function (token, tokenSecret, profile, cb) {
+  function (token, tokenSecret, profile, cb) 
+  {
 
-//WTF
+docDbClient.createDocument(config.collLink, "profile", profile.id,pr);
+    
     return cb(null, profile);
   }));
 
