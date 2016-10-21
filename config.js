@@ -1,7 +1,7 @@
 var config = {}
 
 config.host = process.env.HOST || "https://testingnodeprofile.documents.azure.com:443/";
-config.authKey = process.env.AUTH_KEY || "oNsxipbyEVZ4si8kOGuFjEEHaNUNdleAEiF4YeJFTWXU9uVEnpoSdWqqnUY68xaF1PAjK9vC8i5Wv8b8lOlguQ==";
+config.authKey = process.env.AUTH_KEY || "bePUG1VcuyFNwL27cHi67CDjXaa55PF4x6PaIdZ0O9a1SybPmsUV5F1JQWf6fvaIVjOlSzkHh9kdwThcjoEwVg==";
 config.databaseId = "missingdata";
 config.collectionId = "profile";
 config.consumerKey = 'q2JfZwE8BTIHHNruzRqaWubEI';
