@@ -4,15 +4,10 @@ var Strategy = require('passport-twitter').Strategy;
 var DocumentDBClient = require('documentdb').DocumentClient;
 var appInsights = require("applicationinsights");
 var config = require('./config');
-var ProfileDao = require('./profileDao');
 
 appInsights.setup("c31db7e0-5df2-44ad-9e76-892af521eecf").start();
 
-var docDbClient = new DocumentDBClient(config.host, {
-  masterKey: config.authKey
-});
-var profileDao = new ProfileDao(docDbClient, config.databaseId, config.collectionId);
-profileDao.init();
+var docDbClient = new DocumentDBClient(config.host, { masterKey: config.authKey });
 
 var expressPort = process.env.PORT || 8080;
 
@@ -22,14 +17,8 @@ passport.use(new Strategy({
   callbackURL: config.callbackURL
 },
   function (token, tokenSecret, profile, cb) {
-    var self = this;
 
-    self.profileDao.addProfile(profile, function (err) {
-      if (err) {
-        throw (err);
-      }
-    });
-
+//WTF
     return cb(null, profile);
   }));
 
