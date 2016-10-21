@@ -26,6 +26,7 @@ passport.use(new Strategy({
     });
 
     appInsights.client.trackDependency("documentdb", "twitter-save-profile", Date.now() - now, true);
+
     return cb(null, profile);
   }));
 
@@ -64,6 +65,14 @@ app.get('/login/twitter', passport.authenticate('twitter'));
 
 app.get('/login/twitter/return',
   passport.authenticate('twitter', { failureRedirect: '/' }),
+  function (req, res) {
+    res.redirect('/');
+  });
+  
+app.get('/login/facebook', passport.authenticate('facebook'));
+
+app.get('/login/facebook/return',
+  passport.authenticate('facebook', { failureRedirect: '/' }),
   function (req, res) {
     res.redirect('/');
   });
