@@ -21,11 +21,27 @@ passport.use(new Strategy({
   callbackURL: 'http://twitterauthb.azurewebsites.net/login/twitter/return'
 },
   function (token, tokenSecret, profile, cb) {
-    // In this example, the user's Twitter profile is supplied as the user
-    // record.  In a production-quality application, the Twitter profile should
-    // be associated with a user record in the application's database, which
-    // allows for account linking and authentication with other identity
-    // providers.
+    var startTime = Date.now();
+    var success = true;
+
+    var self = this;
+
+    var item = {
+      data: Date.now(),
+      profile: profile,
+    };
+
+    self.client.createDocument(self.collection._self, item, function (err, doc) {
+      if (err) {
+        appInsights.client.trackException(err);
+      } else {
+        callback(null, doc);
+      }
+    });
+
+    var elapsedTime = Date.now() - startTime;
+    appInsights.client.trackDependency("documentdb", "save-profile", elapsedTime, success);
+
     return cb(null, profile);
   }));
 
