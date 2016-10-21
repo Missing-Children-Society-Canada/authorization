@@ -5,7 +5,7 @@ var DocumentDBClient = require('documentdb').DocumentClient;
 var appInsights = require("applicationinsights");
 var config = require('./config');
 
-appInsights.setup("XXXXXXXXXXXXXXXXXXX").start();
+appInsights.setup("c31db7e0-5df2-44ad-9e76-892af521eecf").start();
 
 var expressPort = process.env.PORT || 80;
 
