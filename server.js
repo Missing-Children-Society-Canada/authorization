@@ -1,8 +1,9 @@
 var express = require('express');
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
-
+var DocumentDBClient = require('documentdb').DocumentClient;
 var appInsights = require("applicationinsights");
+
 appInsights.setup("XXXXXXXXXXXXXXXXXXX").start();
 
 var expressPort = process.env.PORT || 80;
