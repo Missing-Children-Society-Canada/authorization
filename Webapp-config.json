@@ -3,8 +3,26 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "sites_MCSC_Authorization_name": {
-            "type": "string",
-            "defaultValue": "mcsc-authorization-dev"
+            "defaultValue": "mcsc-authorization",
+            "type": "String"
+        },
+        "DOC_DB":{
+
+        },
+        "AUTH_KEY":{
+
+        },
+        "TWITTER_CONSUMER_KEY":{
+
+        },
+        "TWITTER_CONSUMER_SECRET":{
+
+        },
+        "ROOT":{
+
+        },
+        "APP_INSIGHTS_KEY":{
+
         }
     },
     "variables": {},
@@ -21,27 +39,27 @@
                     "appSettings": [
                         {
                             "Name": "DOC_DB",
-                            "Value": "https://missingchildrendata.documents.azure.com:443"
+                            "Value": "[parameters('DOC_DB')]"
                         },
                         {
                             "Name": "AUTH_KEY",
-                            "Value": "agHqTdTA7xaIlSEnaVU63O0sFCnrSZuZHYcBLLoUgeyPCYC5qYSSFca7eMGbqRFmPaAPeaakJmMxYSy0OvxHog"
+                            "Value": "[parameters('AUTH_KEY')]"
                         },
                         {
                             "Name": "TWITTER_CONSUMER_KEY",
-                            "Value": "q2JfZwE8BTIHHNruzRqaWubEI"
+                            "Value": "[parameters('TWITTER_CONSUMER_KEY')]"
                         },
                         {
                             "Name": "TWITTER_CONSUMER_SECRET",
-                            "Value": "FI4nM1BuayKsMBLZ2fA4zicaOkNUvjrhfRgiDYngVQVBtkXRyT"
+                            "Value": "[parameters('TWITTER_CONSUMER_SECRET')]",
                         },
                         {
                             "Name": "ROOT",
-                            "Value": "http://mcsc-authorization-dev.azurewebsites.net"
+                            "Value": "[parameters('ROOT')]",
                         },
                         {
                             "Name": "APP_INSIGHTS_KEY",
-                            "Value": "26c4c42a-5992-4555-b6bf-88e03f2ab657"
+                            "Value": "[parameters('APP_INSIGHTS_KEY')]",
                         }
                     ]
                 }
