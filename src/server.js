@@ -12,15 +12,15 @@ var docDbClient = new DocumentDBClient(config.host, { masterKey: config.authKey 
 var expressPort = process.env.PORT || 80;
 
 passport.use(new Strategy({
-  consumerKey: config.consumerKey,
-  consumerSecret: config.consumerSecret,
-  callbackURL: config.callbackURL
+  consumerKey: config.ConsumerKey,
+  consumerSecret: config.ConsumerSecret,
+  callbackURL: config.CallbackURL
 },
   function (token, tokenSecret, profile, cb) {
     var now = new Date();
 
     var collLink = 'dbs/' + config.databaseId + '/colls/' + config.TwitterCollectionId;
-    docDbClient.createDocument(config.collLink, profile, function (err, document) {
+    docDbClient.createDocument(collLink, profile, function (err, document) {
       if (err) {
         appInsights.client.trackException(err);
       }
