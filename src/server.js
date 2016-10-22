@@ -13,12 +13,12 @@ docDbClient.createDatabase(config.databaseId, function (err, database) {
   if (err) {
     appInsights.client.trackException(err);
   }
-  client.createCollection(config.FacebookCollectionId, collectionDefinition, function (err, collection) {
+  docDbClient.createCollection(config.databaseId, config.FacebookCollectionId, function (err, collection) {
     if (err) {
       appInsights.client.trackException(err);
     }
   });
-  client.createCollection(config.TwitterCollectionId, collectionDefinition, function (err, collection) {
+  docDbClient.createCollection(config.databaseId, config.TwitterCollectionId, function (err, collection) {
     if (err) {
       appInsights.client.trackException(err);
     }
