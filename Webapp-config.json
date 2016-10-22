@@ -30,7 +30,7 @@
         {
             "type": "Microsoft.Web/Sites",
             "apiVersion": "2015-08-01",
-            "name": "[parameters('sites_MCSC_ClientAPI_name')]",
+            "name": "[parameters('sites_MCSC_Authorization_name')]",
             "location": "[resourceGroup().location]",
             "properties": {
                 "name": "[parameters('sites_MCSC_Authorization_name')]",
