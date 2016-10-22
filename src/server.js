@@ -8,8 +8,22 @@ var config = require('./config');
 appInsights.setup(config.appInsightsKey).start();
 
 var docDbClient = new DocumentDBClient(config.host, { masterKey: config.authKey });
-//Create Database
-//Create Collection
+
+docDbClient.createDatabase(config.databaseId, function (err, database) {
+  if (err) {
+    appInsights.client.trackException(err);
+  }
+  client.createCollection(config.FacebookCollectionId, collectionDefinition, function (err, collection) {
+    if (err) {
+      appInsights.client.trackException(err);
+    }
+  });
+  client.createCollection(config.TwitterCollectionId, collectionDefinition, function (err, collection) {
+    if (err) {
+      appInsights.client.trackException(err);
+    }
+  });
+});
 
 var expressPort = process.env.PORT || 8080;
 
@@ -21,6 +35,7 @@ passport.use(new Strategy({
   function (token, tokenSecret, profile, cb) {
     var now = new Date();
 
+    var collLink = 'dbs/' + config.databaseId + '/colls/' + config.TwitterCollectionId;
     docDbClient.createDocument(config.collLink, profile, function (err, document) {
       if (err) {
         appInsights.client.trackException(err);
@@ -70,7 +85,7 @@ app.get('/login/twitter/return',
   function (req, res) {
     res.redirect('/');
   });
-  
+
 app.get('/login/facebook', passport.authenticate('facebook'));
 
 app.get('/login/facebook/return',

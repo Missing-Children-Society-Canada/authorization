@@ -4,9 +4,8 @@ var config = {}
 config.host = process.env.DOC_DB;
 config.authKey = process.env.AUTH_KEY;
 config.databaseId = "missingdata";
-config.collectionId = "twitter-profile";
-
-config.collLink = 'dbs/' + config.databaseId + '/colls/' + config.collectionId;
+config.FacebookCollectionId = "facebook-profile";
+config.TwitterCollectionId = "twitter-profile";
 
 //Twitter configration
 config.consumerKey = process.env.TWITTER_CONSUMER_KEY;
