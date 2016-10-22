@@ -4,25 +4,29 @@
     "parameters": {
         "sites_MCSC_Authorization_name": {
             "defaultValue": "mcsc-authorization",
-            "type": "String"
+            "type": "string"
         },
         "DOC_DB": {
-            "type": "String"
+            "type": "string"
         },
         "AUTH_KEY": {
-            "type": "String"
+            "type": "string"
         },
         "TWITTER_CONSUMER_KEY": {
-            "type": "String"
+            "type": "string"
         },
         "TWITTER_CONSUMER_SECRET": {
-            "type": "String"
+            "type": "string"
         },
         "ROOT": {
-            "type": "String"
+            "type": "string"
         },
         "APP_INSIGHTS_KEY": {
-            "type": "String"
+            "type": "string"
+        },
+        "WEBSITE_NODE_DEFAULT_VERSION": {
+            "type": "string",
+            "defaultValue": "4.4.7"
         }
     },
     "variables": {},
@@ -51,15 +55,19 @@
                         },
                         {
                             "Name": "TWITTER_CONSUMER_SECRET",
-                            "Value": "[parameters('TWITTER_CONSUMER_SECRET')]",
+                            "Value": "[parameters('TWITTER_CONSUMER_SECRET')]"
                         },
                         {
                             "Name": "ROOT",
-                            "Value": "[parameters('ROOT')]",
+                            "Value": "[parameters('ROOT')]"
                         },
                         {
                             "Name": "APP_INSIGHTS_KEY",
-                            "Value": "[parameters('APP_INSIGHTS_KEY')]",
+                            "Value": "[parameters('APP_INSIGHTS_KEY')]"
+                        },
+                        {
+                            "Name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "Value": "4.4.7"
                         }
                     ]
                 }
