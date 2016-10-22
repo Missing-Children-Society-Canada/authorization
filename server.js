@@ -28,8 +28,21 @@ var toStore = {
   raw: profile,
   id: parseInt(profile.id),
 }
-var documentDefinition = { id: "hello world doc 9", content: "Hello World!" };
-    docDbClient.createDocument(config.collLink, documentDefinition, function (err, document) {
+
+
+                     // Add your endpoint
+                     
+var host = "https://testingnodeprofile.documents.azure.com:443/";
+var masterKey = "bePUG1VcuyFNwL27cHi67CDjXaa55PF4x6PaIdZ0O9a1SybPmsUV5F1JQWf6fvaIVjOlSzkHh9kdwThcjoEwVg=="; // Add the masterkey of the endpoint
+var client = new DocumentDBClient(host, { masterKey: masterKey });
+var databaseDefinition = { id: "missingdata" };
+var collectionDefinition = { id: "twitter-profile" };
+
+var dbLink = 'dbs/' + databaseDefinition.id;
+console.log(dbLink);
+collLink = dbLink + '/colls/' + collectionDefinition.id;
+var documentDefinition = 
+    docDbClient.createDocument(collLink, JSON.stringify(profile), function (err, document) {
       if (err) {
         console.log(err);
         appInsights.client.trackException(err);
