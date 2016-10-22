@@ -14,6 +14,6 @@ config.consumerSecret = process.env.TWITTER_CONSUMER_SECRET;
 config.callbackURL = process.env.ROOT + '/login/twitter/return';
 
 //Telemitry
-config.appInsightsKey = 'c31db7e0-5df2-44ad-9e76-892af521eecf';
+config.appInsightsKey = process.env.APP_INSIGHTS_KEY;
 
 module.exports = config;
