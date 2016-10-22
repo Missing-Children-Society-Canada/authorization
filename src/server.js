@@ -9,23 +9,25 @@ appInsights.setup(config.appInsightsKey).start();
 
 var docDbClient = new DocumentDBClient(config.host, { masterKey: config.authKey });
 
-docDbClient.createDatabase(config.databaseId, function (err, database) {
+docDbClient.createDatabase({ id: config.databaseId }, function (err, database) {
   if (err) {
     appInsights.client.trackException(err);
   }
-  docDbClient.createCollection(config.databaseId, config.FacebookCollectionId, function (err, collection) {
+  var fcollLink = 'dbs/' + config.databaseId + '/colls/' + config.FacebookCollectionId;
+  docDbClient.createCollection(fcollLink, { id: config.FacebookCollectionId }, function (err, collection) {
     if (err) {
       appInsights.client.trackException(err);
     }
   });
-  docDbClient.createCollection(config.databaseId, config.TwitterCollectionId, function (err, collection) {
+  var tcollLink = 'dbs/' + config.databaseId + '/colls/' + config.TwitterCollectionId;
+  docDbClient.createCollection(tcollLink, { id: config.TwitterCollectionId }, function (err, collection) {
     if (err) {
       appInsights.client.trackException(err);
     }
   });
 });
 
-var expressPort = process.env.PORT || 8080;
+var expressPort = process.env.PORT || 80;
 
 passport.use(new Strategy({
   consumerKey: config.consumerKey,
