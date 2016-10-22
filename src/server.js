@@ -5,9 +5,11 @@ var DocumentDBClient = require('documentdb').DocumentClient;
 var appInsights = require("applicationinsights");
 var config = require('./config');
 
-appInsights.setup("c31db7e0-5df2-44ad-9e76-892af521eecf").start();
+appInsights.setup(config.appInsightsKey).start();
 
 var docDbClient = new DocumentDBClient(config.host, { masterKey: config.authKey });
+//Create Database
+//Create Collection
 
 var expressPort = process.env.PORT || 8080;
 
