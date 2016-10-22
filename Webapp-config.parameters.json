@@ -4,6 +4,24 @@
     "parameters": {
         "sites_MCSC_Authorization_name": {
             "value": "mcsc-authorization-dev"
+        },
+        "DOC_DB": {
+            "value": ""
+        },
+        "AUTH_KEY": {
+            "value": ""
+        },
+        "TWITTER_CONSUMER_KEY": {
+            "value": ""
+        },
+        "TWITTER_CONSUMER_SECRET": {
+            "value": ""
+        },
+        "ROOT": {
+            "value": ""
+        },
+        "APP_INSIGHTS_KEY": {
+            "value": ""
         }
     }
 }

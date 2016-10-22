@@ -6,23 +6,23 @@
             "defaultValue": "mcsc-authorization",
             "type": "String"
         },
-        "DOC_DB":{
-
+        "DOC_DB": {
+            "type": "String"
         },
-        "AUTH_KEY":{
-
+        "AUTH_KEY": {
+            "type": "String"
         },
-        "TWITTER_CONSUMER_KEY":{
-
+        "TWITTER_CONSUMER_KEY": {
+            "type": "String"
         },
-        "TWITTER_CONSUMER_SECRET":{
-
+        "TWITTER_CONSUMER_SECRET": {
+            "type": "String"
         },
-        "ROOT":{
-
+        "ROOT": {
+            "type": "String"
         },
-        "APP_INSIGHTS_KEY":{
-
+        "APP_INSIGHTS_KEY": {
+            "type": "String"
         }
     },
     "variables": {},
