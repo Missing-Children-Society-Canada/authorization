@@ -69,7 +69,8 @@ app.get('/login/twitter/return',
   function (req, res) {
     res.redirect('/');
   });
-
+  
+/**
 app.get('/login/facebook', passport.authenticate('facebook'));
 
 app.get('/login/facebook/return',
@@ -77,5 +78,6 @@ app.get('/login/facebook/return',
   function (req, res) {
     res.redirect('/');
   });
+ */
 
 app.listen(expressPort);
