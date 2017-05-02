@@ -69,7 +69,7 @@ app.get('/login/twitter/return',
   function (req, res) {
     res.redirect('/');
   });
-  
+
 /**
 app.get('/login/facebook', passport.authenticate('facebook'));
 
