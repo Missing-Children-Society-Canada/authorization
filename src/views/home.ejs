@@ -1,26 +1,34 @@
 <!doctype html>
-<html lang="en">
 
+
+<html>
 <head>
     <title>Self-identification &amp; Registration</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Self-identification and registration for...">
     <meta name="author" content="Jef King">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-        crossorigin="anonymous" />
+    <style>
+        body        { padding-top:80px; }
+    </style>
 </head>
-
 <body>
-    <% if (!user) { %>
-        <p><a href="/login/twitter">Register with Twitter</a></p>
+<div class="container">
+
+    <div class="jumbotron text-center">
+        <h1><span class="fa fa-lock"></span> MSC Self-identification &amp; Registration</h1>
+        <% if (!user) { %>
+        <a href="/login/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
+        <a href="/login/instagram" class="btn btn-info"><span class="fa fa-instagram"></span> Instagram</a>
+        <a href="/login/facebook" class="btn btn-info"><span class="fa fa-facebook"></span> Facebook</a>
     <% } else { %>
             <p>Hello, <%= user.username %>.</p>
     <% } %>
+    </div>
+    
     <script type="text/javascript">
         var appInsights = window.appInsights || function (config) {
             function i(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = "AuthenticatedUserContext", h = "start", c = "stop", l = "Track", a = l + "Event", v = l + "Page", y = u.createElement(o), r, f; y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js"; u.getElementsByTagName(o)[0].parentNode.appendChild(y); try { t.cookie = u.cookie } catch (p) { } for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;)i("track" + r.pop()); return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function (config, i, u, e, o) { var s = f && f(config, i, u, e, o); return s !== !0 && t["_" + r](config, i, u, e, o), s }), t
@@ -28,6 +36,7 @@
         window.appInsights = appInsights;
         appInsights.trackPageView();
     </script>
-</body>
 
+</div>
+</body>
 </html>
