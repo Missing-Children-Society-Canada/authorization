@@ -1,5 +1,7 @@
 var config = {}
 
+config.port = process.env.PORT || 80;
+
 //DocumentDB: Profile Storage
 config.host = process.env.DOC_DB || 'https://XXXXXXXXXXXXXXXXXXXXXXXX.documents.azure.com:443/';
 config.authKey = process.env.AUTH_KEY || 'XXXXXXXXXXXXXXXXXXXXXXXX==';

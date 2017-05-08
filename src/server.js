@@ -9,7 +9,7 @@ appInsights.setup(config.appInsightsKey).start();
 
 var docDbClient = new DocumentDBClient(config.host, { masterKey: config.authKey });
 
-var expressPort = process.env.PORT || 80;
+var expressPort = config.port;
 
 passport.use(new Strategy({
   consumerKey: config.ConsumerKey,
