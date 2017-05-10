@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+	<title>Self Registration</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+<div class="container">
+
+	<div class="page-header text-center">
+		<h1><img src="https://s3-us-west-2.amazonaws.com/mcsc-media-library/site-images/logo-horizontal-white.png" alt="logo" /></span> Profile Page</h1>
+		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
+	<div class="row">
+
+		<!-- INSTAGRAM INFORMATION -->
+		<div class="row">
+		<div class="col-sm-6">
+			<div class="well">
+					<h3 class="text-primary"><span class="fa fa-instagram"></span> Instagram</h3>
+
+				<!-- check if the user has this token (is the user authenticated with this social account) -->
+				<% if (user.instagram.token) { %>
+					<p>
+						<!--<strong>id</strong>: <%= user.instagram.id %><br>
+						<strong>token</strong>: <%= user.instagram.token %><br>-->
+
+						<!--<h1><img src<%= user.instagram.profilepic %>/></h1>-->
+						<strong>Display Name</strong>: <%= user.instagram.displayName %><br>
+						<strong>Username </strong>: <%= user.instagram.username %><br>
+					</p>
+
+					<a href="/unlink/instagram" class="btn btn-primary">Unlink</a>
+				<% } else { %>
+					<a href="/connect/instagram" class="btn btn-primary">Connect Instagram</a>
+				<% } %>
+			</div>
+		</div>
+		<!-- FACEBOOK INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+
+				<!-- check if the user has this token (is the user authenticated with this social account) -->
+				<% if (user.facebook.token) { %>
+					<p>
+						<!--<strong>id</strong>: <%= user.facebook.id %><br>
+						<strong>token</strong>: <%= user.facebook.token %><br>-->
+
+						<!--<h1><img src<%= user.facebook.profilepic %>/></h1>-->
+						<strong>email</strong>: <%= user.facebook.email %><br>
+						<strong>name</strong>: <%= user.facebook.name %><br>
+					</p>
+
+					<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
+				<% } else { %>
+					<a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+				<% } %>
+
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<!-- TWITTER INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
+
+				<% if (user.twitter.token) { %>
+					<p>
+
+						<!--<h1><img src<%= user.twitter.profilepic %>/></h1>-->
+						<!--<strong>id</strong>: <%= user.twitter.id %><br>
+						<strong>token</strong>: <%= user.twitter.token %><br>-->
+						<strong>display name</strong>: <%= user.twitter.displayName %><br>
+						<strong>username</strong>: <%= user.twitter.username %>
+					</p>
+
+					<a href="/unlink/twitter" class="btn btn-info">Unlink</a>
+				<% } else { %>
+					<a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
+				<% } %>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="text-center">		
+		<p><a href=https://mcsc.ca/>Missing Children Society of Canada</a></p>
+	</div>
+
+</div>
+</body>
+</html>

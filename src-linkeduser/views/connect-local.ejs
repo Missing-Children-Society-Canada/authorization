@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<title>Self Registration</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; }
+	</style>
+</head>
+<body>
+<div class="container">
+<div class="col-sm-6 col-sm-offset-3">
+
+	<h1><span class="fa fa-user"></span> Add Basic Information</h1>
+
+	<% if (message.length > 0) { %>
+		<div class="alert alert-danger"><%= message %></div>
+	<% } %>
+
+	<!-- LOGIN FORM -->
+	<form action="/edit/local" method="post">
+		<div class="form-group">
+			<label>First Name</label>
+			<input type="text" class="form-control" name="firstname">
+			<label>Last Name</label>
+			<input type="text" class="form-control" name="lastname">
+			<label>Phone Number</label>
+			<input type="text" class="form-control" name="phonenumber">
+		</div>
+		<div class="form-group">
+			<label>Birth Year</label>
+			<input type="text" class="form-control" name="birthyear">
+		</div>
+
+		<button type="submit" class="btn btn-warning btn-lg">Add Info</button>
+	</form>
+
+	<hr>
+
+	<p><a href="/profile">Go back to profile</a></p>
+
+	<div class="text-center">
+		<p><a href=https://mcsc.ca/>Missing Children Society of Canada</a></p>
+	</div>
+
+</div>
+</div>
+</body>
+</html>
