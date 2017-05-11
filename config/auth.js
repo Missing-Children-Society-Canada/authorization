@@ -11,9 +11,6 @@ module.exports = {
 		'callbackURL': 'http://mcsc-authorization-dev.azurewebsites.net/auth/facebook/callback'
 		// 'callbackURL': 'http://localhost:8080/auth/facebook/callback'
 		// 'callbackURL' : process.env.ROOT + '/auth/facebook/callback';
-
-
-
 	},
 
 	'twitterAuth': {
