@@ -22,16 +22,18 @@
 		<div class="col-sm-6">
 			<div class="well">
 					<h3 class="text-primary"><span class="fa fa-instagram"></span> Instagram</h3>
-
 				<!-- check if the user has this token (is the user authenticated with this social account) -->
 				<% if (user.instagram.token) { %>
 					<p>
-						<!--<strong>id</strong>: <%= user.instagram.id %><br>
-						<strong>token</strong>: <%= user.instagram.token %><br>-->
-
-						<!--<h1><img src<%= user.instagram.profilepic %>/></h1>-->
-						<strong>Display Name</strong>: <%= user.instagram.displayName %><br>
-						<strong>Username </strong>: <%= user.instagram.username %><br>
+						<% if (user.instagram.profilepic) { %>
+							<img src= <%"user.instagram.profilepic"%>/><br>
+						<% } %>
+						<% if (user.instagram.displayName) { %>
+							<strong>Display Name</strong>: <%= user.instagram.displayName %><br>
+						<% } %>
+						<% if (user.instagram.username) { %>
+							<strong>Username </strong>: <%= user.instagram.username %><br>
+						<% } %>
 					</p>
 
 					<a href="/unlink/instagram" class="btn btn-primary">Unlink</a>
@@ -48,12 +50,18 @@
 				<!-- check if the user has this token (is the user authenticated with this social account) -->
 				<% if (user.facebook.token) { %>
 					<p>
-						<!--<strong>id</strong>: <%= user.facebook.id %><br>
-						<strong>token</strong>: <%= user.facebook.token %><br>-->
-
-						<!--<h1><img src<%= user.facebook.profilepic %>/></h1>-->
-						<strong>email</strong>: <%= user.facebook.email %><br>
-						<strong>name</strong>: <%= user.facebook.name %><br>
+						<% if (user.facebook.profilepic) { %>
+							<img src= <%"user.facebook.profilepic"%>/><br>
+						<% } %>
+						<% if (user.facebook.email) { %>
+							<strong>Email</strong>: <%= user.facebook.email %><br>
+						<% } %>
+						<% if (user.facebook.displayName) { %>
+							<strong>Display Name</strong>: <%= user.facebook.displayName %><br>
+						<% } %>
+						<% if (user.facebook.name) { %>
+							<strong>Name</strong>: <%= user.facebook.name %><br>
+						<% } %>
 					</p>
 
 					<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
@@ -72,12 +80,15 @@
 
 				<% if (user.twitter.token) { %>
 					<p>
-
-						<!--<h1><img src<%= user.twitter.profilepic %>/></h1>-->
-						<!--<strong>id</strong>: <%= user.twitter.id %><br>
-						<strong>token</strong>: <%= user.twitter.token %><br>-->
-						<strong>display name</strong>: <%= user.twitter.displayName %><br>
-						<strong>username</strong>: <%= user.twitter.username %>
+						<% if (user.twitter.profilepic) { %>
+							<img src= <%user.twitter.profilepic%>/><br>
+						<% } %>
+						<% if (user.twitter.displayName) { %>
+							<strong>Display name</strong>: <%= user.twitter.displayName %><br>
+						<% } %>
+						<% if (user.twitter.username) { %>
+						<strong>Username</strong>: <%= user.twitter.username %><br>
+						<% } %>
 					</p>
 
 					<a href="/unlink/twitter" class="btn btn-info">Unlink</a>

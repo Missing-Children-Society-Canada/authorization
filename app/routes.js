@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
 	// facebook -------------------------------
 
 		// send to facebook to do the authentication
-		app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+		app.get('/auth/facebook', passport.authenticate('facebook', { scope :'email'}));
 
 		// handle the callback after facebook has authenticated the user
 		app.get('/auth/facebook/callback',
@@ -69,7 +69,7 @@ module.exports = function(app, passport) {
 
 		// send to facebook to do the authentication
 		// TO DO? Add additional permissions?
-		app.get('/connect/facebook', passport.authorize('facebook', { scope : ['email'] }));
+		app.get('/connect/facebook', passport.authorize('facebook', { scope : 'email' }));
 
 		// handle the callback after facebook has authorized the user
 		app.get('/connect/facebook/callback',
@@ -91,10 +91,10 @@ module.exports = function(app, passport) {
 			}));
 
 
-	// google ---------------------------------
+	// instagram ---------------------------------
 
-		// send to google to do the authentication
-		app.get('/connect/instagram', passport.authorize('instagram', { scope : ['profile', 'email'] }));
+		// send to instagram to do the authentication
+		app.get('/connect/instagram', passport.authorize('instagram', { scope : 'basic' }));
 
 		// the callback after google has authorized the user
 		app.get('/connect/instagram/callback',
