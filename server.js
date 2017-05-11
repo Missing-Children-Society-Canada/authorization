@@ -10,7 +10,7 @@ var port = process.env.PORT || 8090;
 
 var configDB = require('./config/database.js');
 
-appInsights.setup("26c4c42a-5992-4555-b6bf-88e03f2ab657").start();
+appInsights.setup("88a4aebf-c91c-4d20-86e5-3e0ac2a2c02e").start();
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
