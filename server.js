@@ -1,14 +1,12 @@
 // server.js
-
-// set up ======================================================================
-// get all the tools we need
 var express = require('express');
-var app = express();
-var port = process.env.PORT || 8090;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
 var appInsights = require("applicationinsights");
+
+var app = express();
+var port = process.env.PORT || 8090;
 
 var configDB = require('./config/database.js');
 
@@ -41,4 +39,3 @@ require('./app/routes.js')(app, passport); // load our routes and pass in our ap
 
 // launch ======================================================================
 app.listen(port);
-console.log('The magic happens on port ' + port);
