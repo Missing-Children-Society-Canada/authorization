@@ -1,48 +1,58 @@
 <!doctype html>
 <html>
+
 <head>
 	<title>Node Authentication</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
-		body 		{ padding-top:80px; }
+		body {
+			padding-top: 80px;
+		}
 	</style>
 </head>
+
 <body>
-<div class="container">
-<div class="col-sm-6 col-sm-offset-3">
+	<div class="container">
+		<div class="col-sm-6 col-sm-offset-3">
 
-	<h1><span class="fa fa-sign-in"></span> Signup</h1>
+			<h1><span class="fa fa-sign-in"></span> Signup</h1>
 
-	<% if (message.length > 0) { %>
-		<div class="alert alert-danger"><%= message %></div>
-	<% } %>
+			<% if (message.length > 0) { %>
+				<div class="alert alert-danger">
+					<%= message %>
+				</div>
+				<% } %>
 
-	<!-- LOGIN FORM -->
-	<form action="/signup" method="post">
-		<div class="form-group">
-			<label>Email</label>
-			<input type="text" class="form-control" name="email">
+					<!-- LOGIN FORM -->
+					<form action="/signup" method="post">
+						<div class="form-group">
+							<label>Email</label>
+							<input type="text" class="form-control" name="email">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" class="form-control" name="password">
+						</div>
+
+						<button type="submit" class="btn btn-warning btn-lg">Signup</button>
+					</form>
+
+					<hr>
+
+					<p>Already have an account? <a href="/login">Login</a></p>
+					<p>Or go <a href="/">home</a>.</p>
+
+					<div class="text-center">
+						<p>A demo by <a href="http://scotch.io">Scotch</a>.</p>
+						<p>Visit the <a href="http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local">tutorial</a>.</p>
+					</div>
+
 		</div>
-		<div class="form-group">
-			<label>Password</label>
-			<input type="password" class="form-control" name="password">
-		</div>
-
-		<button type="submit" class="btn btn-warning btn-lg">Signup</button>
-	</form>
-
-	<hr>
-
-	<p>Already have an account? <a href="/login">Login</a></p>
-	<p>Or go <a href="/">home</a>.</p>
-
-	<div class="text-center">
-		<p>A demo by <a href="http://scotch.io">Scotch</a>.</p>
-		<p>Visit the <a href="http://scotch.io/tutorials/javascript/easy-node-authentication-setup-and-local">tutorial</a>.</p>
 	</div>
-
-</div>
-</div>
+	<script type="text/javascript">
+		var appInsights = window.appInsights || function (config) { function i(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = "AuthenticatedUserContext", h = "start", c = "stop", l = "Track", a = l + "Event", v = l + "Page", y = u.createElement(o), r, f; y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js"; u.getElementsByTagName(o)[0].parentNode.appendChild(y); try { t.cookie = u.cookie } catch (p) { } for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;)i("track" + r.pop()); return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function (config, i, u, e, o) { var s = f && f(config, i, u, e, o); return s !== !0 && t["_" + r](config, i, u, e, o), s }), t }({ instrumentationKey: "26c4c42a-5992-4555-b6bf-88e03f2ab657" }); window.appInsights = appInsights; appInsights.trackPageView();
+	</script>
 </body>
+
 </html>

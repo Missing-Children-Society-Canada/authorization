@@ -8,8 +8,11 @@ var port = process.env.PORT || 8090;
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
+var appInsights = require("applicationinsights");
 
 var configDB = require('./config/database.js');
+
+appInsights.setup("26c4c42a-5992-4555-b6bf-88e03f2ab657").start();
 
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
