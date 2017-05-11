@@ -285,7 +285,5 @@ module.exports = function (passport) {
                 }
 
             });
-
         }));
-
 };
