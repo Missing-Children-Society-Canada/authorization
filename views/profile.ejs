@@ -45,7 +45,7 @@
 
 							<a href="/unlink/instagram" class="btn btn-primary">Unlink</a>
 							<% } else { %>
-								<a href="/connect/instagram" class="btn btn-primary">Connect Instagram</a>
+								<a href="/connect/instagram" class="btn btn-primary">Connect</a>
 								<% } %>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 
 							<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
 							<% } else { %>
-								<a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+								<a href="/connect/facebook" class="btn btn-primary">Connect</a>
 								<% } %>
 
 					</div>
@@ -91,7 +91,7 @@
 						<% if (user.twitter.token) { %>
 							<p>
 								<% if (user.twitter.profilepic) { %>
-									<img src=< %user.twitter.profilepic%> /><br>
+									<img src='< %user.twitter.profilepic%>' /><br>
 									<% } %>
 										<% if (user.twitter.displayName) { %>
 											<strong>Display name</strong>:
@@ -99,13 +99,13 @@
 												<% } %>
 													<% if (user.twitter.username) { %>
 														<strong>Username</strong>:
-														<%= user.twitter.username %><br>
+														<%= user.twitter.username %><br />
 															<% } %>
 							</p>
 
 							<a href="/unlink/twitter" class="btn btn-info">Unlink</a>
 							<% } else { %>
-								<a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
+								<a href="/connect/twitter" class="btn btn-info">Connect</a>
 								<% } %>
 
 					</div>
@@ -116,7 +116,7 @@
 				<p>
 					<a href=https://mcsc.ca/>Missing Children Society of Canada</a>
 					<a href="https://twitter.com/MCSCanada">@MCSCanada</a>
-					<a href="/logout">Logout</a>
+					<a href="/logout">logout</a>
 				</p>
 			</div>
 
