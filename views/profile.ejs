@@ -91,8 +91,10 @@
 						<% if (user.twitter.token) { %>
 							<p>
 								<% if (user.twitter.profilepic) { %>
-									<img src='<%user.twitter.profilepic%>' /><br>
-									<% } %>
+									<img src='<%user.twitter.profilepic%>' />
+									<b><%user.twitter.profilepic%></b>
+									<br>
+								<% } %>
 										<% if (user.twitter.displayName) { %>
 											<strong>Display name</strong>:
 											<%= user.twitter.displayName %><br>
