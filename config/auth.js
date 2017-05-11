@@ -7,9 +7,9 @@ module.exports = {
 		'clientID': '189849514869492', // your App ID 
 		// 'clientID': process.env.FACEBOOK_CONSUMER_KEY || 'XXXXXXXXXXXXXXXXXXXXXXXX',
 		'clientSecret': 'fce4a5d219289346239642928a1f7c79', // your App Secret 
-		// 'clientSecret': process.env.FACEBOOK_CONSUMER_SECRET || 'XXXXXXXXXXXXXXXXXXXXXXXX',
-		'callbackURL': 'http://mcsc-authorization-dev.azurewebsites.net/auth/facebook/callback'
-		//'callbackURL': 'http://localhost:8080/auth/facebook/callback'
+		//'clientSecret': process.env.FACEBOOK_CONSUMER_SECRET || 'XXXXXXXXXXXXXXXXXXXXXXXX',
+		//'callbackURL': 'http://mcsc-authorization-dev.azurewebsites.net/auth/facebook/callback'
+		'callbackURL': 'http://localhost:8080/auth/facebook/callback'
 		// 'callbackURL' : process.env.ROOT + '/auth/facebook/callback';
 	},
 

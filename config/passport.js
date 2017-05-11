@@ -56,8 +56,6 @@ module.exports = function (passport) {
 
                         if (user) {
 
-                            console.log(user);
-
                             // if there is a user id already but no token (user was linked at one point and then removed)
                             if (!user.facebook.token) {
                                 user.facebook.token = token;
