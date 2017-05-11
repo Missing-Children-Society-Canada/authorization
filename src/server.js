@@ -1,83 +1,41 @@
-var express = require('express');
+// server.js
+
+// set up ======================================================================
+// get all the tools we need
+var express  = require('express');
+var app      = express();
+var port     = 8080; //process.env.PORT || 8090;
+var mongoose = require('mongoose');
 var passport = require('passport');
-var Strategy = require('passport-twitter').Strategy;
-var DocumentDBClient = require('documentdb').DocumentClient;
-var appInsights = require("applicationinsights");
-var config = require('./config');
+var flash    = require('connect-flash');
 
-appInsights.setup(config.appInsightsKey).start();
+var configDB = require('./config/database.js');
 
-var docDbClient = new DocumentDBClient(config.host, { masterKey: config.authKey });
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
 
-var expressPort = config.port;
+require('./config/passport')(passport); // pass passport for configuration
 
-passport.use(new Strategy({
-  consumerKey: config.ConsumerKey,
-  consumerSecret: config.ConsumerSecret,
-  callbackURL: config.CallbackURL
-},
-  function (token, tokenSecret, profile, cb) {
-    var now = new Date();
+app.configure(function() {
 
-    var collLink = 'dbs/' + config.databaseId + '/colls/' + config.TwitterCollectionId;
-    docDbClient.createDocument(collLink, profile, function (err, document) {
-      if (err) {
-        appInsights.client.trackException(err);
-      }
-    });
+	// set up our express application
+	app.use(express.logger('dev')); // log every request to the console
+	app.use(express.cookieParser()); // read cookies (needed for auth)
+	app.use(express.bodyParser()); // get information from html forms
 
-    appInsights.client.trackDependency("documentdb", "twitter-save-profile", Date.now() - now, true);
+	app.set('view engine', 'ejs'); // set up ejs for templating
 
-    return cb(null, profile);
-  }));
+	// required for passport
+	app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+	app.use(passport.initialize());
+	app.use(passport.session()); // persistent login sessions
+	app.use(flash()); // use connect-flash for flash messages stored in session
 
-passport.serializeUser(function (user, cb) {
-  cb(null, user);
 });
 
-passport.deserializeUser(function (obj, cb) {
-  cb(null, obj);
-});
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
-// Create a new Express application.
-var app = express();
-
-// Configure view engine to render EJS templates.
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-// Use application-level middleware for common functionality, including logging, parsing, and session handling.
-app.use(require('morgan')('combined'));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-
-// Initialize Passport and restore authentication state, if any, from the session.
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Define routes.
-app.get('/',
-  function (req, res) {
-    res.render('home', { user: req.user });
-  });
-
-app.get('/login/twitter', passport.authenticate('twitter'));
-
-app.get('/login/twitter/return',
-  passport.authenticate('twitter', { failureRedirect: '/' }),
-  function (req, res) {
-    res.redirect('/');
-  });
-
-/**
-app.get('/login/facebook', passport.authenticate('facebook'));
-
-app.get('/login/facebook/return',
-  passport.authenticate('facebook', { failureRedirect: '/' }),
-  function (req, res) {
-    res.redirect('/');
-  });
- */
-
-app.listen(expressPort);
+// launch ======================================================================
+app.listen(port);
+console.log('The magic happens on port ' + port);
