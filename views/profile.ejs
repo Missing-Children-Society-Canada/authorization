@@ -15,11 +15,40 @@
 
 <body>
 	<div class="container">
-
 		<div class="page-header text-center">
-			<h1><img src="https://s3-us-west-2.amazonaws.com/mcsc-media-library/site-images/logo-horizontal-white.png" alt="logo" /></span>
-				Profile Page</h1>
+			<h1>Profile Page</h1>
 		</div>
+		<div class="row">
+			<!-- TWITTER INFORMATION -->
+			<div class="col-sm-6">
+				<div class="well">
+					<h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
+
+					<% if (user.twitter.token) { %>
+						<p>
+							<% if (user.twitter.profilepic) { %>
+								<img src='<%=user.twitter.profilepic%>' />
+								<br>
+								<% } %>
+									<% if (user.twitter.displayName) { %>
+										<strong>Display name</strong>:
+										<%= user.twitter.displayName %><br>
+											<% } %>
+												<% if (user.twitter.username) { %>
+													<strong>Username</strong>:
+													<%= user.twitter.username %><br />
+														<% } %>
+						</p>
+
+						<a href="/unlink/twitter" class="btn btn-info">Remove</a>
+						<% } else { %>
+							<a href="/connect/twitter" class="btn btn-info">Connect</a>
+							<% } %>
+
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 
 			<!-- INSTAGRAM INFORMATION -->
@@ -77,36 +106,6 @@
 							<a href="/unlink/facebook" class="btn btn-primary">Remove</a>
 							<% } else { %>
 								<a href="/connect/facebook" class="btn btn-primary">Connect</a>
-								<% } %>
-
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<!-- TWITTER INFORMATION -->
-				<div class="col-sm-6">
-					<div class="well">
-						<h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
-
-						<% if (user.twitter.token) { %>
-							<p>
-								<% if (user.twitter.profilepic) { %>
-									<img src='<%=user.twitter.profilepic%>' />
-									<br>
-								<% } %>
-										<% if (user.twitter.displayName) { %>
-											<strong>Display name</strong>:
-											<%= user.twitter.displayName %><br>
-												<% } %>
-													<% if (user.twitter.username) { %>
-														<strong>Username</strong>:
-														<%= user.twitter.username %><br />
-															<% } %>
-							</p>
-
-							<a href="/unlink/twitter" class="btn btn-info">Remove</a>
-							<% } else { %>
-								<a href="/connect/twitter" class="btn btn-info">Connect</a>
 								<% } %>
 
 					</div>
