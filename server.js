@@ -2,12 +2,12 @@
 
 // set up ======================================================================
 // get all the tools we need
-var express  = require('express');
-var app      = express();
-var port     = process.env.PORT || 8090;
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 8090;
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash    = require('connect-flash');
+var flash = require('connect-flash');
 
 var configDB = require('./config/database.js');
 
@@ -16,7 +16,7 @@ mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
-app.configure(function() {
+app.configure(function () {
 
 	// set up our express application
 	app.use(express.logger('dev')); // log every request to the console
