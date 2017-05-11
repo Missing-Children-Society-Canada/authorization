@@ -1,112 +1,129 @@
 <!doctype html>
 <html>
+
 <head>
 	<title>Profile</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
-		body 		{ padding-top:80px; word-wrap:break-word; }
+		body {
+			padding-top: 80px;
+			word-wrap: break-word;
+		}
 	</style>
 </head>
+
 <body>
-<div class="container">
+	<div class="container">
 
-	<div class="page-header text-center">
-		<h1><img src="https://s3-us-west-2.amazonaws.com/mcsc-media-library/site-images/logo-horizontal-white.png" alt="logo" /></span> Profile Page</h1>
-		<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-	</div>
-	<div class="row">
-
-		<!-- INSTAGRAM INFORMATION -->
+		<div class="page-header text-center">
+			<h1><img src="https://s3-us-west-2.amazonaws.com/mcsc-media-library/site-images/logo-horizontal-white.png" alt="logo" /></span>
+				Profile Page</h1>
+		</div>
 		<div class="row">
-		<div class="col-sm-6">
-			<div class="well">
-					<h3 class="text-primary"><span class="fa fa-instagram"></span> Instagram</h3>
-				<!-- check if the user has this token (is the user authenticated with this social account) -->
-				<% if (user.instagram.token) { %>
-					<p>
-						<% if (user.instagram.profilepic) { %>
-							<img src= <%"user.instagram.profilepic"%>/><br>
-						<% } %>
-						<% if (user.instagram.displayName) { %>
-							<strong>Display Name</strong>: <%= user.instagram.displayName %><br>
-						<% } %>
-						<% if (user.instagram.username) { %>
-							<strong>Username </strong>: <%= user.instagram.username %><br>
-						<% } %>
-					</p>
 
-					<a href="/unlink/instagram" class="btn btn-primary">Unlink</a>
-				<% } else { %>
-					<a href="/connect/instagram" class="btn btn-primary">Connect Instagram</a>
-				<% } %>
+			<!-- INSTAGRAM INFORMATION -->
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="well">
+						<h3 class="text-primary"><span class="fa fa-instagram"></span> Instagram</h3>
+						<!-- check if the user has this token (is the user authenticated with this social account) -->
+						<% if (user.instagram.token) { %>
+							<p>
+								<% if (user.instagram.profilepic) { %>
+									<img src=< % "user.instagram.profilepic"%>/><br>
+									<% } %>
+										<% if (user.instagram.displayName) { %>
+											<strong>Display Name</strong>:
+											<%= user.instagram.displayName %><br>
+												<% } %>
+													<% if (user.instagram.username) { %>
+														<strong>Username </strong>:
+														<%= user.instagram.username %><br>
+															<% } %>
+							</p>
+
+							<a href="/unlink/instagram" class="btn btn-primary">Unlink</a>
+							<% } else { %>
+								<a href="/connect/instagram" class="btn btn-primary">Connect Instagram</a>
+								<% } %>
+					</div>
+				</div>
+				<!-- FACEBOOK INFORMATION -->
+				<div class="col-sm-6">
+					<div class="well">
+						<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+
+						<!-- check if the user has this token (is the user authenticated with this social account) -->
+						<% if (user.facebook.token) { %>
+							<p>
+								<% if (user.facebook.profilepic) { %>
+									<img src=< % "user.facebook.profilepic"%>/><br>
+									<% } %>
+										<% if (user.facebook.email) { %>
+											<strong>Email</strong>:
+											<%= user.facebook.email %><br>
+												<% } %>
+													<% if (user.facebook.displayName) { %>
+														<strong>Display Name</strong>:
+														<%= user.facebook.displayName %><br>
+															<% } %>
+																<% if (user.facebook.name) { %>
+																	<strong>Name</strong>:
+																	<%= user.facebook.name %><br>
+																		<% } %>
+							</p>
+
+							<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
+							<% } else { %>
+								<a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
+								<% } %>
+
+					</div>
+				</div>
 			</div>
-		</div>
-		<!-- FACEBOOK INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+			<div class="row">
+				<!-- TWITTER INFORMATION -->
+				<div class="col-sm-6">
+					<div class="well">
+						<h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
 
-				<!-- check if the user has this token (is the user authenticated with this social account) -->
-				<% if (user.facebook.token) { %>
-					<p>
-						<% if (user.facebook.profilepic) { %>
-							<img src= <%"user.facebook.profilepic"%>/><br>
-						<% } %>
-						<% if (user.facebook.email) { %>
-							<strong>Email</strong>: <%= user.facebook.email %><br>
-						<% } %>
-						<% if (user.facebook.displayName) { %>
-							<strong>Display Name</strong>: <%= user.facebook.displayName %><br>
-						<% } %>
-						<% if (user.facebook.name) { %>
-							<strong>Name</strong>: <%= user.facebook.name %><br>
-						<% } %>
-					</p>
+						<% if (user.twitter.token) { %>
+							<p>
+								<% if (user.twitter.profilepic) { %>
+									<img src=< %user.twitter.profilepic%> /><br>
+									<% } %>
+										<% if (user.twitter.displayName) { %>
+											<strong>Display name</strong>:
+											<%= user.twitter.displayName %><br>
+												<% } %>
+													<% if (user.twitter.username) { %>
+														<strong>Username</strong>:
+														<%= user.twitter.username %><br>
+															<% } %>
+							</p>
 
-					<a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-				<% } else { %>
-					<a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-				<% } %>
+							<a href="/unlink/twitter" class="btn btn-info">Unlink</a>
+							<% } else { %>
+								<a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
+								<% } %>
 
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		<!-- TWITTER INFORMATION -->
-		<div class="col-sm-6">
-			<div class="well">
-				<h3 class="text-info"><span class="fa fa-twitter"></span> Twitter</h3>
 
-				<% if (user.twitter.token) { %>
-					<p>
-						<% if (user.twitter.profilepic) { %>
-							<img src= <%user.twitter.profilepic%> /><br>
-						<% } %>
-						<% if (user.twitter.displayName) { %>
-							<strong>Display name</strong>: <%= user.twitter.displayName %><br>
-						<% } %>
-						<% if (user.twitter.username) { %>
-						<strong>Username</strong>: <%= user.twitter.username %><br>
-						<% } %>
-					</p>
-
-					<a href="/unlink/twitter" class="btn btn-info">Unlink</a>
-				<% } else { %>
-					<a href="/connect/twitter" class="btn btn-info">Connect Twitter</a>
-				<% } %>
-
+			<div class="text-center">
+				<p>
+					<a href=https://mcsc.ca/>Missing Children Society of Canada</a>
+					<a href="https://twitter.com/MCSCanada">@MCSCanada</a>
+					<a href="/logout">Logout</a>
+				</p>
 			</div>
+
 		</div>
-	</div>
-
-	<div class="text-center">		
-		<p><a href=https://mcsc.ca/>Missing Children Society of Canada</a></p>
-	</div>
-
-</div>
-	<script type="text/javascript">
-		var appInsights = window.appInsights || function (config) { function i(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = "AuthenticatedUserContext", h = "start", c = "stop", l = "Track", a = l + "Event", v = l + "Page", y = u.createElement(o), r, f; y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js"; u.getElementsByTagName(o)[0].parentNode.appendChild(y); try { t.cookie = u.cookie } catch (p) { } for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;)i("track" + r.pop()); return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function (config, i, u, e, o) { var s = f && f(config, i, u, e, o); return s !== !0 && t["_" + r](config, i, u, e, o), s }), t }({ instrumentationKey: "26c4c42a-5992-4555-b6bf-88e03f2ab657" }); window.appInsights = appInsights; appInsights.trackPageView();
-	</script>
+		<script type="text/javascript">
+			var appInsights = window.appInsights || function (config) { function i(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = "AuthenticatedUserContext", h = "start", c = "stop", l = "Track", a = l + "Event", v = l + "Page", y = u.createElement(o), r, f; y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js"; u.getElementsByTagName(o)[0].parentNode.appendChild(y); try { t.cookie = u.cookie } catch (p) { } for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;)i("track" + r.pop()); return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function (config, i, u, e, o) { var s = f && f(config, i, u, e, o); return s !== !0 && t["_" + r](config, i, u, e, o), s }), t }({ instrumentationKey: "26c4c42a-5992-4555-b6bf-88e03f2ab657" }); window.appInsights = appInsights; appInsights.trackPageView();
+		</script>
 </body>
+
 </html>
