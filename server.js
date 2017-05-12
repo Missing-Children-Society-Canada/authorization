@@ -6,7 +6,7 @@ var flash = require('connect-flash');
 var appInsights = require("applicationinsights");
 
 var app = express();
-var port = process.env.PORT || 8090;
+var port = process.env.PORT || 8080;
 
 var configDB = require('./config/database.js');
 
