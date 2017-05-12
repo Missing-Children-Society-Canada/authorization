@@ -11,6 +11,7 @@
     "passport-facebook": "~1.0.2",
     "passport-instagram": "~1.0.0",
     "passport-twitter": "~1.0.2",
-    "applicationinsights": "^0.19.0"
+    "applicationinsights": "^0.19.0",
+    "request": "latest"
   }
 }

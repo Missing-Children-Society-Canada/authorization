@@ -94,7 +94,7 @@ module.exports = function (app, passport) {
 	// instagram ---------------------------------
 
 	// send to instagram to do the authentication
-	app.get('/connect/instagram', passport.authorize('instagram', { scope: 'basic' }));
+	app.get('/connect/instagram', passport.authorize('instagram', { scope: 'public_content' }));
 
 	// the callback after google has authorized the user
 	app.get('/connect/instagram/callback',
