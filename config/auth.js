@@ -31,6 +31,10 @@ module.exports = {
 		'callbackURL': 'http://mcsc-authorization-dev.azurewebsites.net/auth/instagram/callback'
 		// 'callbackURL': 'http://localhost:8080/auth/instagram/callback'
 		// 'callbackURL' : process.env.ROOT + '/auth/instagram/callback';
+	},
+
+	'functions': {
+		'callbackURL': 'https://mscs-cf-functions.azurewebsites.net/api/ig_subscriptions'
 	}
 
 };

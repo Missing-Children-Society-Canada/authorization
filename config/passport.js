@@ -4,6 +4,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var InstagramStrategy = require('passport-instagram').Strategy;
 
+var request = require('request');
+var auth = require('./auth');
+
 // load up the user model
 var User = require('../app/models/user');
 
@@ -260,7 +263,7 @@ module.exports = function (passport) {
                             newUser.save(function (err) {
                                 if (err)
                                     throw err;
-                                return done(null, newUser);
+                                return registerIGSubscription(() => done(null, newUser));
                             });
                         }
                     });
@@ -279,7 +282,7 @@ module.exports = function (passport) {
                     user.save(function (err) {
                         if (err)
                             throw err;
-                        return done(null, user);
+                        return registerIGSubscription(() => done(null, user));
                     });
 
                 }
@@ -287,3 +290,16 @@ module.exports = function (passport) {
             });
         }));
 };
+
+function registerIGSubscription(userid, cb) {
+    request.post("https://api.instagram.com/v1/subscriptions/", {
+        form: {
+            client_id: auth.instagramAuth.clientID,
+            client_secret: auth.instagramAuth.clientSecret,
+            object: "user",
+            aspect: "media",
+            verify_token: process.env.IG_VERIFY_TOKEN,
+            callback_url: auth.functions.callbackURL
+        }
+    }, cb);
+}

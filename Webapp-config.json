@@ -23,6 +23,9 @@
         },
         "APP_INSIGHTS_KEY": {
             "type": "string"
+        },
+        "IG_VERIFY_TOKEN": {
+            "type": "string"
         }
     },
     "variables": {},
@@ -64,6 +67,10 @@
                         {
                             "Name": "WEBSITE_NODE_DEFAULT_VERSION",
                             "Value": "4.4.7"
+                        },
+                        {
+                            "Name": "IG_VERIFY_TOKEN",
+                            "Value": "[parameters('IG_VERIFY_TOKEN')]"
                         }
                     ]
                 }
