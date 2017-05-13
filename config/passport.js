@@ -1,5 +1,4 @@
 // load all the things we need
-//var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 var InstagramStrategy = require('passport-instagram').Strategy;
@@ -46,7 +45,8 @@ module.exports = function (passport) {
 
     },
         function (req, token, refreshToken, profile, done) {
-
+            
+            
             // asynchronous
             process.nextTick(function () {
 
@@ -62,34 +62,50 @@ module.exports = function (passport) {
                             // if there is a user id already but no token (user was linked at one point and then removed)
                             if (!user.facebook.token) {
                                 user.facebook.token = token;
-                                user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                                if (typeof profile.name.givenName !== 'undefined') {
+                                    user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                                }
                                 if (typeof profile.emails !== 'undefined' && profile.emails.length > 0) {
                                     user.facebook.email = profile.emails[0].value;
                                 }
                                 if (typeof profile.photos !== 'undefined' && profile.photos.length > 0) {
                                     user.facebook.profilepic = profile.photos[0].value;
                                 }
-                                user.save(function (err) {
-                                    if (err)
-                                        throw err;
-                                    return done(null, user);
-                                });
+                                user.displayName = profile.displayName;
+                                user.gender = profile.gender;
+                                user.birthday = profile.birthday;
+                                user.hometown = profile.hometown;
+                                user.location = profile.location;
                             }
 
                             return done(null, user); // user found, return that user
                         } else {
+                            console.log(profile);
                             // if there is no user, create them
                             var newUser = new User();
-
                             newUser.facebook.id = profile.id;
                             newUser.facebook.token = token;
-                            newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                            
+                            if (typeof profile.name.givenName !== 'undefined') {
+                                    newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                            }
                             if (typeof profile.emails !== 'undefined' && profile.emails.length > 0) {
                                 newUser.facebook.email = profile.emails[0].value;
                             }
                             if (typeof profile.photos !== 'undefined' && profile.photos.length > 0) {
                                 newUser.facebook.profilepic = profile.photos[0].value;
                             }
+
+                            console.log("Gender ");
+                            console.log(profile.gender);
+                            newUser.facebook.displayName = profile.displayName;
+                            newUser.facebook.gender = profile.gender;
+                            newUser.facebook.birthday = profile._json.birthday;
+                            newUser.facebook.hometown = profile._json.hometown;
+                            newUser.facebook.location = profile._json.location;
+
+                            console.log("NEW USER ");
+                            console.log(newUser);
 
                             newUser.save(function (err) {
                                 if (err)

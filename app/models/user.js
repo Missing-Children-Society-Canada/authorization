@@ -19,6 +19,11 @@ var userSchema = mongoose.Schema({
         displayName  : String,
         name         : String,
         profilepic   : String,
+        age          : String,
+        gender       : String,
+        birthday     : String,
+        hometown     : Object,
+        location     : Object,
 
     },
     twitter          : {
