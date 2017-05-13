@@ -16,7 +16,7 @@
 <body>
 	<div class="container">
 		<div class="page-header">
-			<h1>My Profile</h1>
+			<h1>My Help Find Me Profile</h1>
 		</div>
 		<div class="row">
 			<!-- TWITTER INFORMATION -->
@@ -85,19 +85,31 @@
 						<p>
 							<% if (user.facebook.profilepic) { %>
 								<img src=< % "user.facebook.profilepic"%>/><br>
-								<% } %>
-									<% if (user.facebook.email) { %>
-										<strong>Email</strong>:
-										<%= user.facebook.email %><br>
-											<% } %>
-												<% if (user.facebook.displayName) { %>
-													<strong>Display Name</strong>:
-													<%= user.facebook.displayName %><br>
-														<% } %>
-															<% if (user.facebook.name) { %>
-																<strong>Name</strong>:
-																<%= user.facebook.name %><br>
-																	<% } %>
+							<% } %>
+							<% if (user.facebook.email) { %>
+								<strong>Email</strong>: 
+								<%= user.facebook.email %><br>
+							<% } %>
+							<% if (user.facebook.displayName) { %>
+								<strong>Display Name</strong>:
+								<%= user.facebook.displayName %><br>
+							<% } %>
+								<% if (user.facebook.name) { %>
+								<strong>Name</strong>:
+								<%= user.facebook.name %><br>
+							<% } %>
+							<% if (user.facebook.gender) { %>
+								<strong>Gender</strong>:
+								<%= user.facebook.gender %><br>
+							<% } %>
+							<% if (user.facebook.hometown) { %>
+								<strong>Hometown</strong>:
+								<%= user.facebook.hometown.name %><br>
+							<% } %>								
+							<% if (user.facebook.birthday) { %>
+								<strong>Birthdate</strong>:
+								<%= user.facebook.birthday %><br>
+							<% } %>
 						</p>
 
 						<a href="/unlink/facebook" class="btn btn-primary">Remove</a>
@@ -111,12 +123,19 @@
 
 		<footer class="footer">
 			<div class="container">
-				<div class="btn-group btn-group-sm btn-group-justified" role="group" aria-label="...">
+				<div class="btn-group btn-group-sm" role="group" aria-label="...">
+					<p align="center">
 
-					<p>
 						<a href=https://mcsc.ca/>Missing Children Society of Canada</a>
-						<a href="https://twitter.com/MCSCanada">@MCSCanada</a>
-						<a href="/logout">logout</a>
+					</p>
+					<p align="center">
+						<a href="https://twitter.com/MCSCanada" class="btn btn-info"><span class="fa fa-twitter"></span> @MCSCanada</a>
+					</p>
+					<p align="center">
+						<a href="/logout" class="btn btn-primary"> Logout </a>
+					</p>
+					<p align="center">
+						By registering you are opting in for the HELP FIND ME PROGRAM, but this information will only be used if triggered through one of your social media accounts by including #HFM in a post. To find out more information about the program please see <a href=https://mcsc.ca/>Missing Children Society of Canada</a>
 					</p>
 				</div>
 			</div>

@@ -46,7 +46,6 @@ module.exports = function (passport) {
     },
         function (req, token, refreshToken, profile, done) {
             
-            
             // asynchronous
             process.nextTick(function () {
 
@@ -58,7 +57,6 @@ module.exports = function (passport) {
                             return done(err);
 
                         if (user) {
-
                             // if there is a user id already but no token (user was linked at one point and then removed)
                             if (!user.facebook.token) {
                                 user.facebook.token = token;
@@ -71,16 +69,15 @@ module.exports = function (passport) {
                                 if (typeof profile.photos !== 'undefined' && profile.photos.length > 0) {
                                     user.facebook.profilepic = profile.photos[0].value;
                                 }
-                                user.displayName = profile.displayName;
-                                user.gender = profile.gender;
-                                user.birthday = profile.birthday;
-                                user.hometown = profile.hometown;
-                                user.location = profile.location;
+                                user.facebook.displayName = profile.displayName;
+                                user.facebook.gender = profile.gender;
+                                user.facebook.birthday = profile._json.birthday;
+                                user.facebook.hometown = profile._json.hometown;
+                                user.facebook.location = profile._json.location;
                             }
 
                             return done(null, user); // user found, return that user
                         } else {
-                            console.log(profile);
                             // if there is no user, create them
                             var newUser = new User();
                             newUser.facebook.id = profile.id;
@@ -95,17 +92,11 @@ module.exports = function (passport) {
                             if (typeof profile.photos !== 'undefined' && profile.photos.length > 0) {
                                 newUser.facebook.profilepic = profile.photos[0].value;
                             }
-
-                            console.log("Gender ");
-                            console.log(profile.gender);
                             newUser.facebook.displayName = profile.displayName;
                             newUser.facebook.gender = profile.gender;
                             newUser.facebook.birthday = profile._json.birthday;
                             newUser.facebook.hometown = profile._json.hometown;
                             newUser.facebook.location = profile._json.location;
-
-                            console.log("NEW USER ");
-                            console.log(newUser);
 
                             newUser.save(function (err) {
                                 if (err)
@@ -118,16 +109,25 @@ module.exports = function (passport) {
                 } else {
                     // user already exists and is logged in, we have to link accounts
                     var user = req.user; // pull the user out of the session
+                    // TODO: Delete old user??
 
+                    // Overwrite any existing information
                     user.facebook.id = profile.id;
                     user.facebook.token = token;
-                    user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                    if (typeof profile.name.givenName !== 'undefined') {
+                        user.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                    }
                     if (typeof profile.emails !== 'undefined' && profile.emails.length > 0) {
                         user.facebook.email = profile.emails[0].value;
                     }
                     if (typeof profile.photos !== 'undefined' && profile.photos.length > 0) {
                         user.facebook.profilepic = profile.photos[0].value;
                     }
+                    user.facebook.displayName = profile.displayName;
+                    user.facebook.gender = profile.gender;
+                    user.facebook.birthday = profile._json.birthday;
+                    user.facebook.hometown = profile._json.hometown;
+                    user.facebook.location = profile._json.location;
 
                     user.save(function (err) {
                         if (err)
@@ -241,7 +241,6 @@ module.exports = function (passport) {
 
                 // check if the user is already logged in
                 if (!req.user) {
-
                     User.findOne({ 'instagram.id': profile.id }, function (err, user) {
                         if (err)
                             return done(err);
@@ -260,14 +259,15 @@ module.exports = function (passport) {
                                 user.save(function (err) {
                                     if (err)
                                         throw err;
+                                        // TO DO? RESUBSCRIBE
                                     return done(null, user);
                                 });
                             }
-
+                            // NEED TO RESUBSCRIBE?
                             return done(null, user);
                         } else {
+                            
                             var newUser = new User();
-
                             newUser.instagram.id = profile.id;
                             newUser.instagram.token = token;
                             newUser.instagram.displayName = profile.displayName;
@@ -279,7 +279,7 @@ module.exports = function (passport) {
 
                             newUser.save(function (err) {
                                 if (err)
-                                    throw err;
+                                    throw err;    
                                 return registerIGSubscription(() => done(null, newUser));
                             });
                         }
@@ -300,6 +300,7 @@ module.exports = function (passport) {
                         if (err)
                             throw err;
                         return registerIGSubscription(() => done(null, user));
+                        
                     });
 
                 }
@@ -308,7 +309,7 @@ module.exports = function (passport) {
         }));
 };
 
-function registerIGSubscription(userid, cb) {
+function registerIGSubscription(cb) {
     request.post("https://api.instagram.com/v1/subscriptions/", {
         form: {
             client_id: auth.instagramAuth.clientID,

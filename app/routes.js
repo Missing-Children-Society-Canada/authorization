@@ -48,7 +48,6 @@ module.exports = function (app, passport) {
 			failureRedirect: '/'
 		}));
 
-
 	// instagram ---------------------------------
 
 	// send to instagram to do the authentication
@@ -68,8 +67,7 @@ module.exports = function (app, passport) {
 	// facebook -------------------------------
 
 	// send to facebook to do the authentication
-	// TO DO? Add additional permissions?
-	app.get('/connect/facebook', passport.authorize('facebook', { scope: 'email' }));
+	app.get('/connect/facebook', passport.authorize('facebook', { scope: ['public_profile', 'email', 'user_birthday', 'user_location', 'user_hometown'] }));
 
 	// handle the callback after facebook has authorized the user
 	app.get('/connect/facebook/callback',
@@ -94,9 +92,9 @@ module.exports = function (app, passport) {
 	// instagram ---------------------------------
 
 	// send to instagram to do the authentication
-	app.get('/connect/instagram', passport.authorize('instagram', { scope: 'public_content' }));
+	app.get('/connect/instagram', passport.authorize('instagram', { scope: 'basic' }));
 
-	// the callback after google has authorized the user
+	// the callback after instagram has authorized the user
 	app.get('/connect/instagram/callback',
 		passport.authorize('instagram', {
 			successRedirect: '/profile',
@@ -109,16 +107,6 @@ module.exports = function (app, passport) {
 	// used to unlink accounts. for social accounts, just remove the token
 	// for local account, remove email and password
 	// user account will stay active in case they want to reconnect in the future
-
-	// local -----------------------------------
-	app.get('/unlink/local', function (req, res) {
-		var user = req.user;
-		user.local.email = undefined;
-		user.local.password = undefined;
-		user.save(function (err) {
-			res.redirect('/profile');
-		});
-	});
 
 	// facebook -------------------------------
 	app.get('/unlink/facebook', function (req, res) {
