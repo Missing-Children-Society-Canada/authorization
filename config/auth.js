@@ -28,7 +28,8 @@ module.exports = {
 	},
 
 	'functions': {
-		'callbackURL': 'https://mscs-cf-functions.azurewebsites.net/api/ig_subscriptions'
+		//'callbackURL': 'https://mscs-cf-functions.azurewebsites.net/api/ig_subscriptions'
+		'callbackURL': 'https://mcsc-supporting-api.azurewebsites.net/api/instagram_subscriptions'
 	}
 
 };
