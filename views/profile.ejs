@@ -6,9 +6,46 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
+		/* Sticky footer styles
+-------------------------------------------------- */
+
+		html {
+			position: relative;
+			min-height: 100%;
+		}
+
 		body {
-			padding-top: 80px;
-			word-wrap: break-word;
+			/* Margin bottom by footer height */
+			margin-bottom: 60px;
+		}
+
+		.footer {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			/* Set the fixed height of the footer here */
+			height: 60px;
+			background-color: #f5f5f5;
+		}
+		/* Custom page CSS
+-------------------------------------------------- */
+		/* Not required for template or sticky footer method. */
+
+		body>.container {
+			padding: 60px 15px 0;
+		}
+
+		.container .text-muted {
+			margin: 20px 0;
+		}
+
+		.footer>.container {
+			padding-right: 15px;
+			padding-left: 15px;
+		}
+
+		code {
+			font-size: 80%;
 		}
 	</style>
 </head>
@@ -121,24 +158,18 @@
 			</div>
 		</div>
 
+
 		<footer class="footer">
 			<div class="container">
-				<div class="btn-group btn-group-sm" role="group" aria-label="...">
-					<p align="center">
-						<a href=https://mcsc.ca/>Missing Children Society of Canada</a>
-					</p>
-					<p align="center">
-						<a href="https://twitter.com/MCSCanada" class="btn btn-info"><span class="fa fa-twitter"></span> @MCSCanada</a>
-					</p>
-					<p align="center">
-						<a href="/logout" class="btn btn-primary"> Logout </a>
-					</p>
-					<p align="center" class="text-muted">
-						By registering you are opting in for the HELP FIND ME PROGRAM, but this information will only be used if triggered through
-						one of your social media accounts by including #HFM in a post. To find out more information about the program please
-						see <a href=https://mcsc.ca/>Missing Children Society of Canada</a>
-					</p>
-				</div>
+				<p class="text-muted">
+					By registering you are opting in for the HELP FIND ME PROGRAM, but this information will only be used if triggered through
+					one of your social media accounts by including #HFM in a post. To find out more information about the program please
+					see
+					<a href="https://mcsc.ca/" target="_blank">Missing Children Society of Canada</a> | &copy; Missing Children Society
+					of Canada |
+					<a href="https://mcsc.ca/policy" target="_blank">Privacy Policy</a> |
+					<span class="fa fa-twitter"></span> <a href="https://twitter.com/MCSCanada" target="_blank">@MCSCanada</a>
+				</p>
 			</div>
 		</footer>
 
