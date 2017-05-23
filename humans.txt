@@ -1,8 +1,25 @@
 Author: Jef King
-Site: http://jefking.me
-Twitter: @JefKing_
+Twitter: JefKing_
 Vancouver, BC, Canada
 
 Author: Nastassia Rashid
 Twitter: NastassiaRashid
 Vancouver, BC, Canada
+
+Author: Pierre Roman
+Twitter: 
+Ottawa, ON, Canada
+
+Author: Marc Gagne
+Twitter: 
+Ottawa, ON, Canada
+
+Author: Corey Fowler
+Twitter: cfowlerMSFT
+WA, USA
+
+Author: Abdel Mohamed
+
+Author: Matt Mason
+Twitter: mattmasoncse
+Seattle, WA, USA
