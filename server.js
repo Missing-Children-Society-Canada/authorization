@@ -22,6 +22,7 @@ app.configure(function () {
 	app.use(express.bodyParser()); // get information from html forms
 
 	app.set('view engine', 'ejs'); // set up ejs for templating
+	app.use('/css', express.static(__dirname + '/css'));
 
 	// required for passport
 	app.use(express.session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
