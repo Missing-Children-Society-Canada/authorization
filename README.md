@@ -56,7 +56,7 @@ After we confirm MONGO_DB has the correct value we can run the application
 ```shell
 node server.js
 ```
-Congrats the app is now running at<a href="http://localhost:8080">http://localhost:8080</a> 
+Congrats the app is now running at <a href="http://localhost:8080">http://localhost:8080</a> 
 
 To make our lives easier during development, install nodemon for automatic restart of the node server.
 
