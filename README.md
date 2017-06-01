@@ -11,6 +11,7 @@ You need the following items installed in order to work on this application
 - <a href="https://nodejs.org/en/">Node.js</a>
 - <a href="https://nodejs.org/en/">npm</a> (Comes packaged with every node installation)
 - <a href="https://www.mongodb.com/download-center?jmp=nav#community">MongoDB</a>
+
 ### Setting up the Application
 Create a fork of this repository on GitHub to your account. 
 
@@ -40,7 +41,6 @@ set MONGO_DB=mongodb://url-to-your-database:port
 ```
 
 Double-check if the variable has been set by outputting the variable
-
 
 Linux/Mac
 ```shell 
