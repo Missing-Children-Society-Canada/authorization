@@ -315,7 +315,7 @@ function registerIGSubscription(cb) {
             client_secret: auth.instagramAuth.clientSecret,
             object: "user",
             aspect: "media",
-            verify_token: auth.instagramAuth.token,
+            //verify_token: auth.instagramAuth.token,
             callback_url: auth.instagramAuth.registrationCallbackURL
         }
     }, cb);

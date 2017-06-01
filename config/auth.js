@@ -19,7 +19,7 @@ module.exports = {
 		'clientID': process.env.INSTAGRAM_CONSUMER_KEY || 'c63be8b7e41b496597cc6db47ebd55f3',
 		'clientSecret': process.env.INSTAGRAM_CONSUMER_SECRET || '7b8101ca372347c791285f8a6e0bb451',
 		'callbackURL': process.env.INSTAGRAM_CALLBACK_URL || 'http://mcsc-authorization-dev.azurewebsites.net/auth/instagram/callback',
-		'registrationCallbackURL': process.env.INSTAGRAM_REGISTRATION_CALLBACK_URL || 'https://mcsc-supporting-api.azurewebsites.net/api/instagram_subscriptions',
-		'token': process.env.IG_VERIFY_TOKEN
+		'registrationCallbackURL': process.env.INSTAGRAM_REGISTRATION_CALLBACK_URL || 'https://mcsc-supporting-api.azurewebsites.net/api/instagram_subscriptions'
+		//'token': process.env.IG_VERIFY_TOKEN
 	}
 };
