@@ -77,6 +77,5 @@ nodemon server.js
 * INSTAGRAM_CALLBACK_URL: Call Back Url
 * INSTAGRAM_REGISTRATION_CALLBACK_URL: Registration Call Back URL
 * IG_VERIFY_TOKEN: Instagram Verify Token
-* CALLBACK_URL: 
 * MONGO_DB: Connection to datastore
 * PORT: Port service runs on; default is 8080
