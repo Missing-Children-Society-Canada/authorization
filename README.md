@@ -64,3 +64,19 @@ To make our lives easier during development, install nodemon for automatic resta
 npm install -g nodemon
 nodemon server.js
 ```
+
+### Configuration
+* FACEBOOK_CONSUMER_KEY
+* FACEBOOK_CONSUMER_SECRET
+* FACEBOOK_CALLBACK_URL
+* TWITTER_CONSUMER_KEY
+* TWITTER_CONSUMER_SECRET
+* TWITTER_CALLBACK_URL
+* INSTAGRAM_CONSUMER_KEY
+* INSTAGRAM_CONSUMER_SECRET
+* INSTAGRAM_CALLBACK_URL
+* INSTAGRAM_REGISTRATION_CALLBACK_URL
+* IG_VERIFY_TOKEN
+* CALLBACK_URL: 
+* MONGO_DB: Connection to datastore
+* PORT: Port service runs on; default is 8080

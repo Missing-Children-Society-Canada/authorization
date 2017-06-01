@@ -291,7 +291,8 @@ module.exports = function (passport) {
                     user.instagram.id = profile.id;
                     user.instagram.token = token;
                     user.instagram.displayname = profile.displayName;
-                    user.instagram.username = profile.username
+                    user.instagram.username = profile.username;
+
                     if (typeof profile.photos !== 'undefined' && profile.photos.length > 0) {
                         user.instagram.profilepic = profile.photos[0].value;
                     }
@@ -302,9 +303,7 @@ module.exports = function (passport) {
                         return registerIGSubscription(() => done(null, user));
                         
                     });
-
                 }
-
             });
         }));
 };
@@ -316,8 +315,8 @@ function registerIGSubscription(cb) {
             client_secret: auth.instagramAuth.clientSecret,
             object: "user",
             aspect: "media",
-            verify_token: process.env.IG_VERIFY_TOKEN,
-            callback_url: auth.functions.callbackURL
+            verify_token: auth.instagramAuth.token,
+            callback_url: auth.instagramAuth.registrationCallbackURL
         }
     }, cb);
 }
