@@ -10,7 +10,7 @@ var port = process.env.PORT || 8080;
 var configDB = require('./config/database.js');
 const appInsights = require("applicationinsights");
 
-appInsights.setup("<instrumentation_key>");
+appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY);
 appInsights
     .setAutoDependencyCorrelation(true)
     .setAutoCollectRequests(true)
