@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('../views/partials/header.ejs') %>
 
-<head>
-	<title>MCSC: Help Find Me My Profile</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Missing Children Society of Canada: Help Find Me My Profile">
-	<meta name="author" content="Jef King, Nastassia Rashid, Pierre Roman, Marc Gagne, Corey Fowler, Abdel Mohamed, Matt Mason">
-	<link rel="icon" href="favicon.ico">
-
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/app.css">
-</head>
-
-<body>
 <div class="top-content">
 	<div class="inner-bg">
 	<div class="container">
@@ -144,29 +127,4 @@
 	</div>
 </div>
 
-
-	<div class="nav-footer">
-		<div class="container">
-			<div class="row">
-				<div class="footer-links clearfix">
-					<p class="text-muted">
-						By registering you are opting in for the HELP FIND ME PROGRAM, but this information will only be used if triggered through
-						one of your social media accounts by including #HFM in a post. To find out more information about the program please
-						see
-						<a href="https://mcsc.ca/" target="_blank">Missing Children Society of Canada</a> <br/> 
-						&copy; Missing Children Society of Canada | 
-						<a href="https://mcsc.ca/policy" target="_blank">Privacy Policy</a> |
-						<span class="fa fa-twitter"></span> <a href="https://twitter.com/MCSCanada" target="_blank">@MCSCanada</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<script type="text/javascript">
-		var appInsights = window.appInsights || function (config) { function i(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = "AuthenticatedUserContext", h = "start", c = "stop", l = "Track", a = l + "Event", v = l + "Page", y = u.createElement(o), r, f; y.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js"; u.getElementsByTagName(o)[0].parentNode.appendChild(y); try { t.cookie = u.cookie } catch (p) { } for (t.queue = [], t.version = "1.0", r = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; r.length;)i("track" + r.pop()); return i("set" + s), i("clear" + s), i(h + a), i(c + a), i(h + v), i(c + v), i("flush"), config.disableExceptionTracking || (r = "onerror", i("_" + r), f = e[r], e[r] = function (config, i, u, e, o) { var s = f && f(config, i, u, e, o); return s !== !0 && t["_" + r](config, i, u, e, o), s }), t }({ instrumentationKey: "88a4aebf-c91c-4d20-86e5-3e0ac2a2c02e" }); window.appInsights = appInsights; appInsights.trackPageView();
-	</script>
-</body>
-
-</html>
+<%- include('../views/partials/footer.ejs') %>
