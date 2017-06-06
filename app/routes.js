@@ -1,3 +1,4 @@
+const User = require('../app/models/user')
 module.exports = function (app, passport) {
 
 	// normal routes ===============================================================
@@ -18,6 +19,33 @@ module.exports = function (app, passport) {
 	app.get('/logout', function (req, res) {
 		req.logout();
 		res.redirect('/');
+	});
+
+	// Show amount of users and social media accounts
+	app.get('/stats',function(req,res){
+		// Get All users
+		User.find({},function(err,user){
+			// Get the user count and the social media counts
+			const userCount = user.length;
+			const twitterCount = user.filter(function(account){return account.twitter.id != undefined}).length;
+			const instagramCount = user.filter(function(account){return account.instagram.id != undefined}).length;
+			const facebookCount = user.filter(function(account){return account.facebook.id != undefined}).length;
+			const socialMediaCount = twitterCount + instagramCount + facebookCount;
+			
+			// Put it in js object
+			const data = {
+				"userCount":userCount,
+				"twitterCount":twitterCount,
+				"instagramCount":instagramCount,
+				"facebookCount":facebookCount,
+				"socialMediaCount": socialMediaCount
+			};
+			
+			// if no errors then send the js data
+			if(!err) res.status(200).json(data);
+			// send error 400 if there is error fetching data
+			else res.status(400).send();
+		});
 	});
 
 	// =============================================================================
