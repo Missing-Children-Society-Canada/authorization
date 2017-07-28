@@ -42,19 +42,16 @@ module.exports = function (passport) {
         callbackURL: configAuth.facebookAuth.callbackURL,
         profileFields: ['id', 'age_range', 'birthday', 'email', 'first_name', 'gender', 'hometown', 'last_name'],
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-
     },
         function (req, token, refreshToken, profile, done) {
-
             // asynchronous
             process.nextTick(function () {
-
                 // check if the user is already logged in
                 if (!req.user) {
-
                     User.findOne({ 'facebook.id': profile.id }, function (err, user) {
-                        if (err)
+                        if (err) {
                             return done(err);
+                        }
 
                         if (user) {
                             // if there is a user id already but no token (user was linked at one point and then removed)
@@ -92,6 +89,7 @@ module.exports = function (passport) {
                             if (typeof profile.photos !== 'undefined' && profile.photos.length > 0) {
                                 newUser.facebook.profilepic = profile.photos[0].value;
                             }
+
                             newUser.facebook.displayName = profile.displayName;
                             newUser.facebook.gender = profile.gender;
                             newUser.facebook.birthday = profile._json.birthday;
@@ -123,6 +121,7 @@ module.exports = function (passport) {
                     if (typeof profile.photos !== 'undefined' && profile.photos.length > 0) {
                         user.facebook.profilepic = profile.photos[0].value;
                     }
+
                     user.facebook.displayName = profile.displayName;
                     user.facebook.gender = profile.gender;
                     user.facebook.birthday = profile._json.birthday;
@@ -134,10 +133,8 @@ module.exports = function (passport) {
                             throw err;
                         return done(null, user);
                     });
-
                 }
             });
-
         }));
 
     // =========================================================================
@@ -149,16 +146,12 @@ module.exports = function (passport) {
         consumerSecret: configAuth.twitterAuth.consumerSecret,
         callbackURL: configAuth.twitterAuth.callbackURL,
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-
     },
         function (req, token, tokenSecret, profile, done) {
-
             // asynchronous
             process.nextTick(function () {
-
                 // check if the user is already logged in
                 if (!req.user) {
-
                     User.findOne({ 'twitter.id': profile.id }, function (err, user) {
                         if (err)
                             return done(err);
@@ -200,7 +193,6 @@ module.exports = function (passport) {
                             });
                         }
                     });
-
                 } else {
                     // user already exists and is logged in, we have to link accounts
                     var user = req.user; // pull the user out of the session
@@ -219,9 +211,7 @@ module.exports = function (passport) {
                         return done(null, user);
                     });
                 }
-
             });
-
         }));
 
     // =========================================================================
@@ -235,7 +225,6 @@ module.exports = function (passport) {
         passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
     },
         function (req, token, refreshToken, profile, done) {
-
             // asynchronous
             process.nextTick(function () {
 
@@ -284,7 +273,6 @@ module.exports = function (passport) {
                             });
                         }
                     });
-
                 } else {
                     // user already exists and is logged in, we have to link accounts
                     var user = req.user; // pull the user out of the session
