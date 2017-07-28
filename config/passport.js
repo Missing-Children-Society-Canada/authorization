@@ -45,7 +45,7 @@ module.exports = function (passport) {
 
     },
         function (req, token, refreshToken, profile, done) {
-            
+
             // asynchronous
             process.nextTick(function () {
 
@@ -82,9 +82,9 @@ module.exports = function (passport) {
                             var newUser = new User();
                             newUser.facebook.id = profile.id;
                             newUser.facebook.token = token;
-                            
+
                             if (typeof profile.name.givenName !== 'undefined') {
-                                    newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+                                newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
                             }
                             if (typeof profile.emails !== 'undefined' && profile.emails.length > 0) {
                                 newUser.facebook.email = profile.emails[0].value;
@@ -259,14 +259,14 @@ module.exports = function (passport) {
                                 user.save(function (err) {
                                     if (err)
                                         throw err;
-                                        // TO DO? RESUBSCRIBE
+                                    // TO DO? RESUBSCRIBE
                                     return done(null, user);
                                 });
                             }
                             // NEED TO RESUBSCRIBE?
                             return done(null, user);
                         } else {
-                            
+
                             var newUser = new User();
                             newUser.instagram.id = profile.id;
                             newUser.instagram.token = token;
@@ -279,7 +279,7 @@ module.exports = function (passport) {
 
                             newUser.save(function (err) {
                                 if (err)
-                                    throw err;    
+                                    throw err;
                                 return registerIGSubscription(() => done(null, newUser));
                             });
                         }
@@ -301,7 +301,6 @@ module.exports = function (passport) {
                         if (err)
                             throw err;
                         return registerIGSubscription(() => done(null, user));
-                        
                     });
                 }
             });
